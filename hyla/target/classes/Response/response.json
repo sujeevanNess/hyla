@@ -1,0 +1,581 @@
+{
+"quotes": [
+{
+"items": [
+{
+"quoteItemId": 199110,
+"model": {
+"id": 71868,
+"title": "Apple A1332 iPhone 4 32GB - AT&T",
+"imageUrl": "https://assets.tradein.hylamobile.com/modelImage/71868/MODEL_IMAGE_LARGE/177",
+"adjustmentReminderText": "",
+"adjustmentReminderImage": "modelImage/71868/ADJUSTMENT_IMAGE_SMALL/177",
+"formattedTitle": "A1332 iPhone 4 32GB - AT&T",
+"recycleCredit": "$0",
+"baseImageURL": "https://tradein.flipswap.com/"
+},
+"questions": [
+{
+"text": "Has the Activation Lock been disabled? (e.g., Find My iPhone)",
+"required": true,
+"questionType": "SINGLE_SELECT",
+"validAnswers": [
+{
+"id": 2440,
+"answerText": "Yes",
+"isDefault": true,
+"skuCode": null,
+"questionCode": null
+},
+{
+"id": 2441,
+"answerText": "No",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+}
+],
+"code": "DEACTIVATED",
+"helpText": "Find My iPhone must be turned off and a factory reset must be completed prior to finalizing the trade. Go to Settings>iCloud>Find My iPhone. Turn off iMessaging in Settings if migrating from iOS to another OS.",
+"selectedAnswer": {
+"id": 2440,
+"answerText": null,
+"isDefault": true,
+
+"skuCode": null,
+"questionCode": null
+},
+"primaryQuestion": null,
+"secondaryQuestions": null,
+"sortOrder": 10,
+"primary": false
+},
+{
+"text": "Customer's Wireless Mobile number",
+"required": true,
+"questionType": "TEXT",
+"validAnswers": [
+{
+"id": 1238,
+"answerText": "",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+}
+],
+"code": "CELL_PHONE_PHONE_NUM",
+"helpText": "Enter customer's Wireless Mobile Telephone Number in this field. If customer is activating a new line of service, enter the number being ported to Wireless or the new number when assigned.",
+"selectedAnswer": {
+"id": 1238,
+"answerText": "9137076481",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+},
+"primaryQuestion": null,
+"secondaryQuestions": null,
+"sortOrder": 60,
+"primary": false
+},
+{
+"text": "Is the device otherwise free of breaks or cracks in the housing, keypad, hinge, or battery door?",
+"required": true,
+"questionType": "SINGLE_SELECT",
+"validAnswers": [
+{
+"id": 2448,
+"answerText": "Yes",
+"isDefault": true,
+"skuCode": null,
+"questionCode": null
+},
+{
+"id": 2449,
+"answerText": "No",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+}
+],
+"code": "NO_DAMAGE",
+"helpText": "Look for cracks around charger and other ports cracked hinges and battery covers. All buttons on the keypad or volume/camera buttons should function. The battery door must remain with the device if applicable. Any breaks or cracks should result in a NO answer for this question.",
+"selectedAnswer": {
+"id": 2448,
+"answerText": null,
+"isDefault": true,
+"skuCode": null,
+"questionCode": null
+},
+"primaryQuestion": null,
+"secondaryQuestions": null,
+"sortOrder": 30,
+"primary": false
+},
+{
+"text": "Does the Device Power On and Off?",
+"required": true,
+"questionType": "SINGLE_SELECT",
+"validAnswers": [
+{
+"id": 2436,
+"answerText": "Yes",
+"isDefault": true,
+"skuCode": null,
+"questionCode": null
+},
+{
+"id": 2437,
+"answerText": "No",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+}
+],
+"code": "POWER_ON",
+"helpText": "Power the device completely off and on again. Make sure the device stays on.",
+"selectedAnswer": {
+"id": 2436,
+"answerText": null,
+"isDefault": true,
+"skuCode": null,
+"questionCode": null
+},
+"primaryQuestion": null,
+"secondaryQuestions": null,
+"sortOrder": 1,
+"primary": false
+},
+{
+"text": "Is the LCD intact, free of any chips, and functioning correctly?",
+"required": true,
+"questionType": "SINGLE_SELECT",
+"validAnswers": [
+{
+"id": 2444,
+"answerText": "Yes",
+"isDefault": true,
+"skuCode": null,
+"questionCode": null
+},
+{
+"id": 2445,
+"answerText": "No",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+}
+],
+"code": "LCD_FUNCTIONALITY",
+"helpText": "LCD should work properly, display all information clearly, and should not contain any dead spots. Any cracks or chips should result in a NO answer for this question.",
+"selectedAnswer": {
+"id": 2444,
+"answerText": null,
+"isDefault": true,
+"skuCode": null,
+"questionCode": null
+},
+"primaryQuestion": null,
+"secondaryQuestions": null,
+"sortOrder": 20,
+"primary": false
+},
+{
+"text": "IMEI/ESN/Serial #",
+"required": true,
+"questionType": "TEXT",
+"validAnswers": [
+{
+"id": 1237,
+"answerText": "",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+}
+],
+"code": "CELL_PHONE_IMEI_ESN",
+"helpText": "Including the phone's IMEI or ESN is very important. It is the only way we can identify the phone if it arrives in our facility without a trade-in receipt. You can usually find the 15 or 17 digit IMEI or ESN printed on a sticker under the phone's battery. IMEI and ESN are the same thing - the serial number of your phone. Note: ESN's have two formats, DEC (all numbers) or HEX (numbers and letters). The IMEI or the ESN HEX format should be used. Note: IMEI's can be displayed on most SIM based phones by dialing the code *# 06 #.",
+"selectedAnswer": {
+"id": 1237,
+"answerText": "013425009681341",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+},
+"primaryQuestion": null,
+"secondaryQuestions": null,
+"sortOrder": 50,
+"primary": false
+}
+],
+"promotions": [
+{
+"id": 775,
+"promotionType": "BONUS",
+"promotionDescription": "iPhone 4/4S $100 Bonus",
+"promotionAmount": {
+"amount": 50,
+"currencyCode": "USD"
+},
+"imeiRequired": false,
+"applied": true
+},
+{
+"id": 774,
+"promotionType": "BILL_CREDIT",
+"promotionDescription": "APP200 (Pre Oct 1st Purchase)",
+"promotionCode": "APP200OCT1",
+"promotionAmount": {
+"amount": 100,
+"currencyCode": "USD"
+},
+"disclaimerText": "Please enter the IMEI of the new device purchased. \r\nOnly devices purchased prior to October 1st are eligible for the additional promotional value.",
+"imeiRequired": true,
+"applied": true
+}
+],
+"quantity": 1,
+"imeiESNSerialNumber": "65412395466587",
+"organicValue": {
+"amount": 100,
+"currencyCode": "USD"
+},
+"promotionValue": {
+"amount": 150,
+"currencyCode": "USD"
+},
+"remainingPromotionValue": {
+"amount": 50,
+"currencyCode": "USD"
+},
+"remainingOrganicValue": {
+"amount": 100,
+"currencyCode": "USD"
+}
+}
+],
+"date": "10/9/14",
+"quoteExpired": false,
+"quoteNumber": 30082416000008,
+"invoiceQuestions": [],
+"quoteType": "NEWUI",
+"createdByCompany": 7649,
+"totalQuoteValue": {
+"amount": 250,
+"currencyCode": "USD"
+},
+"expirationDate": "10/17/17",
+"refNumber": "30082416000008",
+"apiSalesRep": "POS iFrameTest",
+"companyName": "XYZ Dealers",
+"username": "test_user",
+"totalRemainingQuoteValue": {
+"amount": 150,
+"currencyCode": "USD"
+},
+"totalRemainingPromotionValue": {
+"amount": 50,
+"currencyCode": "USD"
+},
+"totalRemainingOrganicValue": {
+"amount": 100,
+"currencyCode": "USD"
+},
+"totalPromotionValue": {
+"amount": 150,
+"currencyCode": "USD"
+},
+"totalOrganicValue": {
+"amount": 100,
+"currencyCode": "USD"
+}
+},
+{
+"items": [
+{
+"quoteItemId": 199111,
+"model": {
+"id": 71868,
+"title": "Apple A1332 iPhone 4 32GB - AT&T",
+"imageUrl": "https://assets.tradein.hylamobile.com/modelImage/71868/MODEL_IMAGE_LARGE/177",
+"adjustmentReminderText": "",
+"adjustmentReminderImage": "modelImage/71868/ADJUSTMENT_IMAGE_SMALL/177",
+"formattedTitle": "A1332 iPhone 4 32GB - AT&T",
+"recycleCredit": "$0",
+"baseImageURL": "https://tradein.flipswap.com/"
+},
+"questions": [
+{
+"text": "Has the Activation Lock been disabled? (e.g., Find My iPhone)",
+"required": true,
+"questionType": "SINGLE_SELECT",
+"validAnswers": [
+{
+"id": 2440,
+"answerText": "Yes",
+"isDefault": true,
+"skuCode": null,
+"questionCode": null
+},
+{
+"id": 2441,
+"answerText": "No",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+}
+],
+"code": "DEACTIVATED",
+"helpText": "Find My iPhone must be turned off and a factory reset must be completed prior to finalizing the trade. Go to Settings>iCloud>Find My iPhone. Turn off iMessaging in Settings if migrating from iOS to another OS.",
+"selectedAnswer": {
+"id": 2440,
+"answerText": null,
+"isDefault": true,
+"skuCode": null,
+"questionCode": null
+},
+"primaryQuestion": null,
+"secondaryQuestions": null,
+"sortOrder": 10,
+"primary": false
+},
+{
+"text": "Customer's Wireless Mobile number",
+"required": true,
+"questionType": "TEXT",
+"validAnswers": [
+{
+"id": 1238,
+"answerText": "",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+}
+],
+"code": "CELL_PHONE_PHONE_NUM",
+"helpText": "Enter customer's Wireless Mobile Telephone Number in this field. If customer is activating a new line of service, enter the number being ported to Wireless or the new number when assigned.",
+"selectedAnswer": {
+"id": 1238,
+"answerText": "9137076481",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+},
+"primaryQuestion": null,
+"secondaryQuestions": null,
+"sortOrder": 60,
+"primary": false
+},
+{
+"text": "Is the device otherwise free of breaks or cracks in the housing, keypad, hinge, or battery door?",
+"required": true,
+"questionType": "SINGLE_SELECT",
+"validAnswers": [
+{
+"id": 2448,
+"answerText": "Yes",
+"isDefault": true,
+"skuCode": null,
+"questionCode": null
+},
+{
+"id": 2449,
+"answerText": "No",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+}
+],
+"code": "NO_DAMAGE",
+"helpText": "Look for cracks around charger and other ports cracked hinges and battery covers. All buttons on the keypad or volume/camera buttons should function. The battery door must remain with the device if applicable. Any breaks or cracks should result in a NO answer for this question.",
+"selectedAnswer": {
+"id": 2448,
+"answerText": null,
+"isDefault": true,
+"skuCode": null,
+"questionCode": null
+},
+"primaryQuestion": null,
+"secondaryQuestions": null,
+"sortOrder": 30,
+"primary": false
+},
+{
+"text": "Does the Device Power On and Off?",
+"required": true,
+"questionType": "SINGLE_SELECT",
+"validAnswers": [
+{
+"id": 2436,
+"answerText": "Yes",
+"isDefault": true,
+"skuCode": null,
+"questionCode": null
+},
+{
+"id": 2437,
+"answerText": "No",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+}
+],
+"code": "POWER_ON",
+"helpText": "Power the device completely off and on again. Make sure the device stays on.",
+"selectedAnswer": {
+"id": 2436,
+"answerText": null,
+"isDefault": true,
+"skuCode": null,
+"questionCode": null
+},
+"primaryQuestion": null,
+"secondaryQuestions": null,
+"sortOrder": 1,
+"primary": false
+},
+{
+"text": "Is the LCD intact, free of any chips, and functioning correctly?",
+"required": true,
+"questionType": "SINGLE_SELECT",
+"validAnswers": [
+{
+"id": 2444,
+"answerText": "Yes",
+"isDefault": true,
+"skuCode": null,
+"questionCode": null
+},
+{
+"id": 2445,
+"answerText": "No",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+}
+],
+"code": "LCD_FUNCTIONALITY",
+"helpText": "LCD should work properly, display all information clearly, and should not contain any dead spots. Any cracks or chips should result in a NO answer for this question.",
+"selectedAnswer": {
+"id": 2444,
+"answerText": null,
+"isDefault": true,
+"skuCode": null,
+"questionCode": null
+},
+"primaryQuestion": null,
+"secondaryQuestions": null,
+"sortOrder": 20,
+"primary": false
+},
+{
+"text": "IMEI/ESN/Serial #",
+"required": true,
+"questionType": "TEXT",
+"validAnswers": [
+{
+"id": 1237,
+"answerText": "",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+}
+],
+"code": "CELL_PHONE_IMEI_ESN",
+"helpText": "Including the phone's IMEI or ESN is very important. It is the only way we can identify the phone if it arrives in our facility without a trade-in receipt. You can usually find the 15 or 17 digit IMEI or ESN printed on a sticker under the phone's battery. IMEI and ESN are the same thing - the serial number of your phone. Note: ESN's have two formats DEC (all numbers) or HEX (numbers and letters). The IMEI or the ESN HEX format should be used. Note: IMEI's can be displayed on most SIM based phones by dialing the code *# 06 #.",
+"selectedAnswer": {
+"id": 1237,
+"answerText": "013425009681341",
+"isDefault": false,
+"skuCode": null,
+"questionCode": null
+},
+"primaryQuestion": null,
+"secondaryQuestions": null,
+"sortOrder": 50,
+"primary": false
+}
+],
+"promotions": [
+{
+"id": 775,
+"promotionType": "BONUS",
+"promotionDescription": "iPhone 4/4S $100 Bonus",
+"promotionAmount": {
+"amount": 50,
+"currencyCode": "USD"
+},
+"imeiRequired": false,
+"applied": true
+},
+{
+"id": 774,
+"promotionType": "BILL_CREDIT",
+"promotionDescription": "APP200 (Pre Oct 1st Purchase)",
+"promotionCode": "APP200OCT1",
+"promotionAmount": {
+"amount": 100,
+"currencyCode": "USD"
+},
+"disclaimerText": "Please enter the IMEI of the new device purchased. \r\nOnly devices purchased prior to October 1st are eligible for the additional promotional value.",
+"imeiRequired": true,
+"applied": true
+}
+],
+"quantity": 1,
+"imeiESNSerialNumber": "65412395466587",
+"organicValue": {
+"amount": 100,
+"currencyCode": "USD"
+},
+"promotionValue": {
+"amount": 150,
+"currencyCode": "USD"
+},
+"remainingPromotionValue": {
+"amount": 50,
+"currencyCode": "USD"
+},
+"remainingOrganicValue": {
+"amount": 50,
+"currencyCode": "USD"
+}
+}
+],
+"date": "10/9/14",
+"quoteExpired": false,
+"quoteNumber": 30082416000009,
+"invoiceQuestions": [],
+"quoteType": "NEWUI",
+"createdByCompany": 7649,
+"totalQuoteValue": {
+"amount": 250,
+"currencyCode": "USD"
+},
+"expirationDate": "10/17/17",
+"refNumber": "30082416000009",
+"apiSalesRep": "POS iFrameTest",
+"companyName": "XYZ Dealers",
+"username": "test_user",
+"totalRemainingQuoteValue": {
+"amount": 100,
+"currencyCode": "USD"
+},
+"totalRemainingPromotionValue": {
+"amount": 50,
+"currencyCode": "USD"
+},
+"totalRemainingOrganicValue": {
+"amount": 50,
+"currencyCode": "USD"
+},
+"totalPromotionValue": {
+"amount": 150,
+"currencyCode": "USD"
+},
+"totalOrganicValue": {
+"amount": 100,
+"currencyCode": "USD"
+}
+}
+]
+}

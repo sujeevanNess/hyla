@@ -1,0 +1,8 @@
+{
+  "request": {
+    "username": "uname",
+    "password": "pwd",
+    "references": { "refNumber": "30082416000008" },
+    "quotes": { "quoteNumber": "30082416000008" }
+  }
+}

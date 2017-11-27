@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:mulerequester="http://www.mulesoft.org/schema/mule/mulerequester" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/mulerequester http://www.mulesoft.org/schema/mule/mulerequester/current/mule-mulerequester.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8085" doc:name="HTTP Listener Configuration"/>
+    <apikit:config name="Router" raml="retrive-quote.raml" consoleEnabled="true" consolePath="console" keepRamlBaseUri="false" doc:name="Router"/>
+    <file:connector name="File" autoDelete="false" streaming="true" validateConnections="true" doc:name="File" readFromDirectory="D:\Deployment\Anypoint_WS\hyla_retrivequote\src\main\api\Response"/>
+   
+    <flow name="hyla_retrivequoteFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/hyla/*" doc:name="HTTP"/>
+        <apikit:router config-ref="Router" doc:name="APIkit Router"/>
+    </flow>
+    <flow name="post:/RetrieveQuote">
+        <object-to-string-transformer doc:name="Object to String"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+
+{
+	request: payload.request,
+	username: payload.request.username,
+	password: payload.request.password,
+	references: payload.request.references,
+	refNumber: payload.request.references.refNumber,
+	quotes: payload.request.quotes.quoteNumber
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <logger message="INPUT REQUEST: #[payload]" level="INFO" doc:name="Logger"/>
+        <set-payload value="{ &quot;quotes&quot;: [ { &quot;items&quot;: [ { &quot;quoteItemId&quot;: 199110, &quot;model&quot;: { &quot;id&quot;: 71868, &quot;title&quot;: &quot;Apple A1332 iPhone 4 32GB - AT&amp;T&quot;, &quot;imageUrl&quot;: &quot;https://assets.tradein.hylamobile.com/modelImage/71868/MODEL_IMAGE_LARGE/177&quot;, &quot;adjustmentReminderText&quot;: &quot;&quot;, &quot;adjustmentReminderImage&quot;: &quot;modelImage/71868/ADJUSTMENT_IMAGE_SMALL/177&quot;, &quot;formattedTitle&quot;: &quot;A1332 iPhone 4 32GB - AT&amp;T&quot;, &quot;recycleCredit&quot;: &quot;$0&quot;, &quot;baseImageURL&quot;: &quot;https://tradein.flipswap.com/&quot; }, &quot;questions&quot;: [ { &quot;text&quot;: &quot;Has the Activation Lock been disabled? (e.g., Find My iPhone)&quot;, &quot;required&quot;: true, &quot;questionType&quot;: &quot;SINGLE_SELECT&quot;, &quot;validAnswers&quot;: [ { &quot;id&quot;: 2440, &quot;answerText&quot;: &quot;Yes&quot;, &quot;isDefault&quot;: true, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, { &quot;id&quot;: 2441, &quot;answerText&quot;: &quot;No&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null } ], &quot;code&quot;: &quot;DEACTIVATED&quot;, &quot;helpText&quot;: &quot;Find My iPhone must be turned off and a factory reset must be completed prior to finalizing the trade. Go to Settings&gt;iCloud&gt;Find My iPhone. Turn off iMessaging in Settings if migrating from iOS to another OS.&quot;, &quot;selectedAnswer&quot;: { &quot;id&quot;: 2440, &quot;answerText&quot;: null, &quot;isDefault&quot;: true,  &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, &quot;primaryQuestion&quot;: null, &quot;secondaryQuestions&quot;: null, &quot;sortOrder&quot;: 10, &quot;primary&quot;: false }, { &quot;text&quot;: &quot;Customer's Wireless Mobile number&quot;, &quot;required&quot;: true, &quot;questionType&quot;: &quot;TEXT&quot;, &quot;validAnswers&quot;: [ { &quot;id&quot;: 1238, &quot;answerText&quot;: &quot;&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null } ], &quot;code&quot;: &quot;CELL_PHONE_PHONE_NUM&quot;, &quot;helpText&quot;: &quot;Enter customer's Wireless Mobile Telephone Number in this field. If customer is activating a new line of service, enter the number being ported to Wireless or the new number when assigned.&quot;, &quot;selectedAnswer&quot;: { &quot;id&quot;: 1238, &quot;answerText&quot;: &quot;9137076481&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, &quot;primaryQuestion&quot;: null, &quot;secondaryQuestions&quot;: null, &quot;sortOrder&quot;: 60, &quot;primary&quot;: false }, { &quot;text&quot;: &quot;Is the device otherwise free of breaks or cracks in the housing, keypad, hinge, or battery door?&quot;, &quot;required&quot;: true, &quot;questionType&quot;: &quot;SINGLE_SELECT&quot;, &quot;validAnswers&quot;: [ { &quot;id&quot;: 2448, &quot;answerText&quot;: &quot;Yes&quot;, &quot;isDefault&quot;: true, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, { &quot;id&quot;: 2449, &quot;answerText&quot;: &quot;No&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null } ], &quot;code&quot;: &quot;NO_DAMAGE&quot;, &quot;helpText&quot;: &quot;Look for cracks around charger and other ports cracked hinges and battery covers. All buttons on the keypad or volume/camera buttons should function. The battery door must remain with the device if applicable. Any breaks or cracks should result in a NO answer for this question.&quot;, &quot;selectedAnswer&quot;: { &quot;id&quot;: 2448, &quot;answerText&quot;: null, &quot;isDefault&quot;: true, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, &quot;primaryQuestion&quot;: null, &quot;secondaryQuestions&quot;: null, &quot;sortOrder&quot;: 30, &quot;primary&quot;: false }, { &quot;text&quot;: &quot;Does the Device Power On and Off?&quot;, &quot;required&quot;: true, &quot;questionType&quot;: &quot;SINGLE_SELECT&quot;, &quot;validAnswers&quot;: [ { &quot;id&quot;: 2436, &quot;answerText&quot;: &quot;Yes&quot;, &quot;isDefault&quot;: true, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, { &quot;id&quot;: 2437, &quot;answerText&quot;: &quot;No&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null } ], &quot;code&quot;: &quot;POWER_ON&quot;, &quot;helpText&quot;: &quot;Power the device completely off and on again. Make sure the device stays on.&quot;, &quot;selectedAnswer&quot;: { &quot;id&quot;: 2436, &quot;answerText&quot;: null, &quot;isDefault&quot;: true, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, &quot;primaryQuestion&quot;: null, &quot;secondaryQuestions&quot;: null, &quot;sortOrder&quot;: 1, &quot;primary&quot;: false }, { &quot;text&quot;: &quot;Is the LCD intact, free of any chips, and functioning correctly?&quot;, &quot;required&quot;: true, &quot;questionType&quot;: &quot;SINGLE_SELECT&quot;, &quot;validAnswers&quot;: [ { &quot;id&quot;: 2444, &quot;answerText&quot;: &quot;Yes&quot;, &quot;isDefault&quot;: true, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, { &quot;id&quot;: 2445, &quot;answerText&quot;: &quot;No&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null } ], &quot;code&quot;: &quot;LCD_FUNCTIONALITY&quot;, &quot;helpText&quot;: &quot;LCD should work properly, display all information clearly, and should not contain any dead spots. Any cracks or chips should result in a NO answer for this question.&quot;, &quot;selectedAnswer&quot;: { &quot;id&quot;: 2444, &quot;answerText&quot;: null, &quot;isDefault&quot;: true, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, &quot;primaryQuestion&quot;: null, &quot;secondaryQuestions&quot;: null, &quot;sortOrder&quot;: 20, &quot;primary&quot;: false }, { &quot;text&quot;: &quot;IMEI/ESN/Serial #&quot;, &quot;required&quot;: true, &quot;questionType&quot;: &quot;TEXT&quot;, &quot;validAnswers&quot;: [ { &quot;id&quot;: 1237, &quot;answerText&quot;: &quot;&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null } ], &quot;code&quot;: &quot;CELL_PHONE_IMEI_ESN&quot;, &quot;helpText&quot;: &quot;Including the phone's IMEI or ESN is very important. It is the only way we can identify the phone if it arrives in our facility without a trade-in receipt. You can usually find the 15 or 17 digit IMEI or ESN printed on a sticker under the phone's battery. IMEI and ESN are the same thing - the serial number of your phone. Note: ESN's have two formats, DEC (all numbers) or HEX (numbers and letters). The IMEI or the ESN HEX format should be used. Note: IMEI's can be displayed on most SIM based phones by dialing the code *# 06 #.&quot;, &quot;selectedAnswer&quot;: { &quot;id&quot;: 1237, &quot;answerText&quot;: &quot;013425009681341&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, &quot;primaryQuestion&quot;: null, &quot;secondaryQuestions&quot;: null, &quot;sortOrder&quot;: 50, &quot;primary&quot;: false } ], &quot;promotions&quot;: [ { &quot;id&quot;: 775, &quot;promotionType&quot;: &quot;BONUS&quot;, &quot;promotionDescription&quot;: &quot;iPhone 4/4S $100 Bonus&quot;, &quot;promotionAmount&quot;: { &quot;amount&quot;: 50, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;imeiRequired&quot;: false, &quot;applied&quot;: true }, { &quot;id&quot;: 774, &quot;promotionType&quot;: &quot;BILL_CREDIT&quot;, &quot;promotionDescription&quot;: &quot;APP200 (Pre Oct 1st Purchase)&quot;, &quot;promotionCode&quot;: &quot;APP200OCT1&quot;, &quot;promotionAmount&quot;: { &quot;amount&quot;: 100, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;disclaimerText&quot;: &quot;Please enter the IMEI of the new device purchased. \r\nOnly devices purchased prior to October 1st are eligible for the additional promotional value.&quot;, &quot;imeiRequired&quot;: true, &quot;applied&quot;: true } ], &quot;quantity&quot;: 1, &quot;imeiESNSerialNumber&quot;: &quot;65412395466587&quot;, &quot;organicValue&quot;: { &quot;amount&quot;: 100, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;promotionValue&quot;: { &quot;amount&quot;: 150, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;remainingPromotionValue&quot;: { &quot;amount&quot;: 50, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;remainingOrganicValue&quot;: { &quot;amount&quot;: 100, &quot;currencyCode&quot;: &quot;USD&quot; } } ], &quot;date&quot;: &quot;10/9/14&quot;, &quot;quoteExpired&quot;: false, &quot;quoteNumber&quot;: 30082416000008, &quot;invoiceQuestions&quot;: [], &quot;quoteType&quot;: &quot;NEWUI&quot;, &quot;createdByCompany&quot;: 7649, &quot;totalQuoteValue&quot;: { &quot;amount&quot;: 250, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;expirationDate&quot;: &quot;10/17/17&quot;, &quot;refNumber&quot;: &quot;30082416000008&quot;, &quot;apiSalesRep&quot;: &quot;POS iFrameTest&quot;, &quot;companyName&quot;: &quot;XYZ Dealers&quot;, &quot;username&quot;: &quot;test_user&quot;, &quot;totalRemainingQuoteValue&quot;: { &quot;amount&quot;: 150, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;totalRemainingPromotionValue&quot;: { &quot;amount&quot;: 50, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;totalRemainingOrganicValue&quot;: { &quot;amount&quot;: 100, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;totalPromotionValue&quot;: { &quot;amount&quot;: 150, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;totalOrganicValue&quot;: { &quot;amount&quot;: 100, &quot;currencyCode&quot;: &quot;USD&quot; } }, { &quot;items&quot;: [ { &quot;quoteItemId&quot;: 199111, &quot;model&quot;: { &quot;id&quot;: 71868, &quot;title&quot;: &quot;Apple A1332 iPhone 4 32GB - AT&amp;T&quot;, &quot;imageUrl&quot;: &quot;https://assets.tradein.hylamobile.com/modelImage/71868/MODEL_IMAGE_LARGE/177&quot;, &quot;adjustmentReminderText&quot;: &quot;&quot;, &quot;adjustmentReminderImage&quot;: &quot;modelImage/71868/ADJUSTMENT_IMAGE_SMALL/177&quot;, &quot;formattedTitle&quot;: &quot;A1332 iPhone 4 32GB - AT&amp;T&quot;, &quot;recycleCredit&quot;: &quot;$0&quot;, &quot;baseImageURL&quot;: &quot;https://tradein.flipswap.com/&quot; }, &quot;questions&quot;: [ { &quot;text&quot;: &quot;Has the Activation Lock been disabled? (e.g., Find My iPhone)&quot;, &quot;required&quot;: true, &quot;questionType&quot;: &quot;SINGLE_SELECT&quot;, &quot;validAnswers&quot;: [ { &quot;id&quot;: 2440, &quot;answerText&quot;: &quot;Yes&quot;, &quot;isDefault&quot;: true, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, { &quot;id&quot;: 2441, &quot;answerText&quot;: &quot;No&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null } ], &quot;code&quot;: &quot;DEACTIVATED&quot;, &quot;helpText&quot;: &quot;Find My iPhone must be turned off and a factory reset must be completed prior to finalizing the trade. Go to Settings&gt;iCloud&gt;Find My iPhone. Turn off iMessaging in Settings if migrating from iOS to another OS.&quot;, &quot;selectedAnswer&quot;: { &quot;id&quot;: 2440, &quot;answerText&quot;: null, &quot;isDefault&quot;: true, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, &quot;primaryQuestion&quot;: null, &quot;secondaryQuestions&quot;: null, &quot;sortOrder&quot;: 10, &quot;primary&quot;: false }, { &quot;text&quot;: &quot;Customer's Wireless Mobile number&quot;, &quot;required&quot;: true, &quot;questionType&quot;: &quot;TEXT&quot;, &quot;validAnswers&quot;: [ { &quot;id&quot;: 1238, &quot;answerText&quot;: &quot;&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null } ], &quot;code&quot;: &quot;CELL_PHONE_PHONE_NUM&quot;, &quot;helpText&quot;: &quot;Enter customer's Wireless Mobile Telephone Number in this field. If customer is activating a new line of service, enter the number being ported to Wireless or the new number when assigned.&quot;, &quot;selectedAnswer&quot;: { &quot;id&quot;: 1238, &quot;answerText&quot;: &quot;9137076481&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, &quot;primaryQuestion&quot;: null, &quot;secondaryQuestions&quot;: null, &quot;sortOrder&quot;: 60, &quot;primary&quot;: false }, { &quot;text&quot;: &quot;Is the device otherwise free of breaks or cracks in the housing, keypad, hinge, or battery door?&quot;, &quot;required&quot;: true, &quot;questionType&quot;: &quot;SINGLE_SELECT&quot;, &quot;validAnswers&quot;: [ { &quot;id&quot;: 2448, &quot;answerText&quot;: &quot;Yes&quot;, &quot;isDefault&quot;: true, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, { &quot;id&quot;: 2449, &quot;answerText&quot;: &quot;No&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null } ], &quot;code&quot;: &quot;NO_DAMAGE&quot;, &quot;helpText&quot;: &quot;Look for cracks around charger and other ports cracked hinges and battery covers. All buttons on the keypad or volume/camera buttons should function. The battery door must remain with the device if applicable. Any breaks or cracks should result in a NO answer for this question.&quot;, &quot;selectedAnswer&quot;: { &quot;id&quot;: 2448, &quot;answerText&quot;: null, &quot;isDefault&quot;: true, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, &quot;primaryQuestion&quot;: null, &quot;secondaryQuestions&quot;: null, &quot;sortOrder&quot;: 30, &quot;primary&quot;: false }, { &quot;text&quot;: &quot;Does the Device Power On and Off?&quot;, &quot;required&quot;: true, &quot;questionType&quot;: &quot;SINGLE_SELECT&quot;, &quot;validAnswers&quot;: [ { &quot;id&quot;: 2436, &quot;answerText&quot;: &quot;Yes&quot;, &quot;isDefault&quot;: true, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, { &quot;id&quot;: 2437, &quot;answerText&quot;: &quot;No&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null } ], &quot;code&quot;: &quot;POWER_ON&quot;, &quot;helpText&quot;: &quot;Power the device completely off and on again. Make sure the device stays on.&quot;, &quot;selectedAnswer&quot;: { &quot;id&quot;: 2436, &quot;answerText&quot;: null, &quot;isDefault&quot;: true, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, &quot;primaryQuestion&quot;: null, &quot;secondaryQuestions&quot;: null, &quot;sortOrder&quot;: 1, &quot;primary&quot;: false }, { &quot;text&quot;: &quot;Is the LCD intact, free of any chips, and functioning correctly?&quot;, &quot;required&quot;: true, &quot;questionType&quot;: &quot;SINGLE_SELECT&quot;, &quot;validAnswers&quot;: [ { &quot;id&quot;: 2444, &quot;answerText&quot;: &quot;Yes&quot;, &quot;isDefault&quot;: true, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, { &quot;id&quot;: 2445, &quot;answerText&quot;: &quot;No&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null } ], &quot;code&quot;: &quot;LCD_FUNCTIONALITY&quot;, &quot;helpText&quot;: &quot;LCD should work properly, display all information clearly, and should not contain any dead spots. Any cracks or chips should result in a NO answer for this question.&quot;, &quot;selectedAnswer&quot;: { &quot;id&quot;: 2444, &quot;answerText&quot;: null, &quot;isDefault&quot;: true, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, &quot;primaryQuestion&quot;: null, &quot;secondaryQuestions&quot;: null, &quot;sortOrder&quot;: 20, &quot;primary&quot;: false }, { &quot;text&quot;: &quot;IMEI/ESN/Serial #&quot;, &quot;required&quot;: true, &quot;questionType&quot;: &quot;TEXT&quot;, &quot;validAnswers&quot;: [ { &quot;id&quot;: 1237, &quot;answerText&quot;: &quot;&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null } ], &quot;code&quot;: &quot;CELL_PHONE_IMEI_ESN&quot;, &quot;helpText&quot;: &quot;Including the phone's IMEI or ESN is very important. It is the only way we can identify the phone if it arrives in our facility without a trade-in receipt. You can usually find the 15 or 17 digit IMEI or ESN printed on a sticker under the phone's battery. IMEI and ESN are the same thing - the serial number of your phone. Note: ESN's have two formats DEC (all numbers) or HEX (numbers and letters). The IMEI or the ESN HEX format should be used. Note: IMEI's can be displayed on most SIM based phones by dialing the code *# 06 #.&quot;, &quot;selectedAnswer&quot;: { &quot;id&quot;: 1237, &quot;answerText&quot;: &quot;013425009681341&quot;, &quot;isDefault&quot;: false, &quot;skuCode&quot;: null, &quot;questionCode&quot;: null }, &quot;primaryQuestion&quot;: null, &quot;secondaryQuestions&quot;: null, &quot;sortOrder&quot;: 50, &quot;primary&quot;: false } ], &quot;promotions&quot;: [ { &quot;id&quot;: 775, &quot;promotionType&quot;: &quot;BONUS&quot;, &quot;promotionDescription&quot;: &quot;iPhone 4/4S $100 Bonus&quot;, &quot;promotionAmount&quot;: { &quot;amount&quot;: 50, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;imeiRequired&quot;: false, &quot;applied&quot;: true }, { &quot;id&quot;: 774, &quot;promotionType&quot;: &quot;BILL_CREDIT&quot;, &quot;promotionDescription&quot;: &quot;APP200 (Pre Oct 1st Purchase)&quot;, &quot;promotionCode&quot;: &quot;APP200OCT1&quot;, &quot;promotionAmount&quot;: { &quot;amount&quot;: 100, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;disclaimerText&quot;: &quot;Please enter the IMEI of the new device purchased. \r\nOnly devices purchased prior to October 1st are eligible for the additional promotional value.&quot;, &quot;imeiRequired&quot;: true, &quot;applied&quot;: true } ], &quot;quantity&quot;: 1, &quot;imeiESNSerialNumber&quot;: &quot;65412395466587&quot;, &quot;organicValue&quot;: { &quot;amount&quot;: 100, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;promotionValue&quot;: { &quot;amount&quot;: 150, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;remainingPromotionValue&quot;: { &quot;amount&quot;: 50, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;remainingOrganicValue&quot;: { &quot;amount&quot;: 50, &quot;currencyCode&quot;: &quot;USD&quot; } } ], &quot;date&quot;: &quot;10/9/14&quot;, &quot;quoteExpired&quot;: false, &quot;quoteNumber&quot;: 30082416000009, &quot;invoiceQuestions&quot;: [], &quot;quoteType&quot;: &quot;NEWUI&quot;, &quot;createdByCompany&quot;: 7649, &quot;totalQuoteValue&quot;: { &quot;amount&quot;: 250, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;expirationDate&quot;: &quot;10/17/17&quot;, &quot;refNumber&quot;: &quot;30082416000009&quot;, &quot;apiSalesRep&quot;: &quot;POS iFrameTest&quot;, &quot;companyName&quot;: &quot;XYZ Dealers&quot;, &quot;username&quot;: &quot;test_user&quot;, &quot;totalRemainingQuoteValue&quot;: { &quot;amount&quot;: 100, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;totalRemainingPromotionValue&quot;: { &quot;amount&quot;: 50, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;totalRemainingOrganicValue&quot;: { &quot;amount&quot;: 50, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;totalPromotionValue&quot;: { &quot;amount&quot;: 150, &quot;currencyCode&quot;: &quot;USD&quot; }, &quot;totalOrganicValue&quot;: { &quot;amount&quot;: 100, &quot;currencyCode&quot;: &quot;USD&quot; } } ] }" metadata:id="b69ca9cc-94e8-4ab7-a364-afdc8fda1269" doc:name="Set Payload"/>
+
+        <dw:transform-message metadata:id="72293908-d01a-4433-ab65-0b8817e5ffcd" doc:name="Transform Message">
+            <dw:input-payload mimeType="application/json"/>
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	quotes: payload.quotes map ((quote , indexOfQuote) -> {
+		items: quote.items map ((item , indexOfItem) -> {
+			quoteItemId: item.quoteItemId,
+			model: {
+				id: item.model.id,
+				title: item.model.title,
+				imageUrl: item.model.imageUrl,
+				adjustmentReminderText: item.model.adjustmentReminderText,
+				adjustmentReminderImage: item.model.adjustmentReminderImage,
+				formattedTitle: item.model.formattedTitle,
+				recycleCredit: item.model.recycleCredit,
+				baseImageURL: item.model.baseImageURL
+			},
+			questions: item.questions map ((question , indexOfQuestion) -> {
+				text: question.text,
+				required: question.required,
+				questionType: question.questionType,
+				validAnswers: question.validAnswers map ((validAnswer , indexOfValidAnswer) -> {
+					id: validAnswer.id,
+					answerText: validAnswer.answerText,
+					isDefault: validAnswer.isDefault,
+					skuCode: validAnswer.skuCode,
+					questionCode: validAnswer.questionCode
+				}),
+				code: question.code,
+				helpText: question.helpText,
+				selectedAnswer: {
+					id: question.selectedAnswer.id,
+					answerText: question.selectedAnswer.answerText,
+					isDefault: question.selectedAnswer.isDefault,
+					skuCode: question.selectedAnswer.skuCode,
+					questionCode: question.selectedAnswer.questionCode
+				},
+				primaryQuestion: question.primaryQuestion,
+				secondaryQuestions: question.secondaryQuestions,
+				sortOrder: question.sortOrder,
+				primary: question.primary
+			}),
+			promotions: item.promotions map ((promotion , indexOfPromotion) -> {
+				id: promotion.id,
+				promotionType: promotion.promotionType,
+				promotionDescription: promotion.promotionDescription,
+				promotionAmount: {
+					amount: promotion.promotionAmount.amount,
+					currencyCode: promotion.promotionAmount.currencyCode
+				},
+				imeiRequired: promotion.imeiRequired,
+				applied: promotion.applied
+			}),
+			quantity: item.quantity,
+			imeiESNSerialNumber: item.imeiESNSerialNumber,
+			organicValue: {
+				amount: item.organicValue.amount,
+				currencyCode: item.organicValue.currencyCode
+			},
+			promotionValue: {
+				amount: item.promotionValue.amount,
+				currencyCode: item.promotionValue.currencyCode
+			},
+			remainingPromotionValue: {
+				amount: item.remainingPromotionValue.amount,
+				currencyCode: item.remainingPromotionValue.currencyCode
+			},
+			remainingOrganicValue: {
+				amount: item.remainingOrganicValue.amount,
+				currencyCode: item.remainingOrganicValue.currencyCode
+			}
+		}),
+		date: quote.date,
+		quoteExpired: quote.quoteExpired,
+		quoteNumber: quote.quoteNumber,
+		invoiceQuestions: quote.invoiceQuestions map ((invoiceQuestion , indexOfInvoiceQuestion) -> invoiceQuestion),
+		quoteType: quote.quoteType,
+		createdByCompany: quote.createdByCompany,
+		totalQuoteValue: {
+			amount: quote.totalQuoteValue.amount,
+			currencyCode: quote.totalQuoteValue.currencyCode
+		},
+		expirationDate: quote.expirationDate,
+		refNumber: quote.refNumber,
+		apiSalesRep: quote.apiSalesRep,
+		companyName: quote.companyName,
+		username: quote.username,
+		totalRemainingQuoteValue: {
+			amount: quote.totalRemainingQuoteValue.amount,
+			currencyCode: quote.totalRemainingQuoteValue.currencyCode
+		},
+		totalRemainingPromotionValue: {
+			amount: quote.totalRemainingPromotionValue.amount,
+			currencyCode: quote.totalRemainingPromotionValue.currencyCode
+		},
+		totalRemainingOrganicValue: {
+			amount: quote.totalRemainingOrganicValue.amount,
+			currencyCode: quote.totalRemainingOrganicValue.currencyCode
+		},
+		totalPromotionValue: {
+			amount: quote.totalPromotionValue.amount,
+			currencyCode: quote.totalPromotionValue.currencyCode
+		},
+		totalOrganicValue: {
+			amount: quote.totalOrganicValue.amount,
+			currencyCode: quote.totalOrganicValue.currencyCode
+		}
+	})
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <logger message="OUTPUT : #[payload]" level="INFO" doc:name="Logger"/>
+    </flow>
+</mule>

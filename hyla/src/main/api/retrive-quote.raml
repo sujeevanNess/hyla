@@ -1,0 +1,45 @@
+#%RAML 0.8
+title: Hyla Integration
+version: v2
+baseUri: http://localhost:8081/verizon
+protocols: [HTTP,HTTPS]
+mediaType: application/json
+
+/RetrieveQuote:
+  displayName: Retrieve Quote
+  description: 
+    This API allows you to retrieve the quote information for a transaction in HYLA Mobile’s trade-in application which assume the quote has been created already.
+  post:
+    body: 
+      application/json:
+       # schema: 
+        example: !include Request/request.json
+    responses: 
+      200:
+        body: 
+          application/json:
+            #schema: 
+            example: !include Response/response.json
+      500:
+        body:
+          application/json:
+            example: |
+                 {
+                   "errorMessage": {
+                       "description": "Server Error",
+                       "status": 500
+                     }
+                 }
+      400:
+        body: 
+          application/json:
+            example: |
+              {
+                    "errorMessage": {
+                       "description": "Resource URL Error",
+                       "status": 400
+                       
+                     }
+                   }
+
+              
